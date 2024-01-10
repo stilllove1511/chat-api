@@ -14,12 +14,13 @@ const io = new Server<ClientToServerEvents, ServerToClientEvents>()
 new EventLogger(io).config()
 
 io.on('connection', (socket) => {
-    const dialogId = socket.handshake.headers.dialogId as string
+    const userId = socket.handshake.headers.user as string
+    const receiverId = socket.handshake.headers.receiver as string
 
-    socket.join(dialogId)
+    socket.join(userId)
 
     socket.on('sendMessage', (message) => {
-        io.to(dialogId).emit('receiveMessage', message)
+        socket.to(receiverId).emit('receiveMessage', message)
     })
 })
 
