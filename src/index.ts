@@ -15,7 +15,7 @@ new EventLogger(io).config()
 
 io.on('connection', (socket) => {
     const userId = socket.handshake.headers.user as string
-    const receiverId = socket.handshake.headers.receiver as string
+    const receiverId = socket.handshake.query.receiver as string
 
     socket.join(userId)
 
