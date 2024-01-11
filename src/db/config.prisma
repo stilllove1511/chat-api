@@ -1,0 +1,33 @@
+datasource db {
+    provider = "mysql"
+    url      = env("mysql://root:123456@localhost:3306/chat")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model User {
+    id       String     @id @default(uuid())
+    password String
+    dialog   Dialog     @relation(fields: [dialogId], references: [id])
+    dialogId Int
+    Messages Messages[]
+}
+
+model Dialog {
+    id Int @id @default(autoincrement())
+
+    User     User[]
+    Messages Messages[]
+}
+
+model Messages {
+    id        Int      @id @default(autoincrement())
+    text      String
+    createdAt DateTime @default(now())
+    user      User     @relation(fields: [userId], references: [id])
+    userId    String
+    dialog    Dialog   @relation(fields: [dialogId], references: [id])
+    dialogId  Int
+}
