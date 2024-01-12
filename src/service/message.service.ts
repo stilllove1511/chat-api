@@ -1,7 +1,7 @@
 import { PrismaClient } from 'generated/client'
 
 export class MessageService {
-    constructor(private readonly db: PrismaClient) {}
+    private readonly db = new PrismaClient()
 
     async saveMessages({
         text,

@@ -1,38 +1,31 @@
 import { Server } from 'socket.io'
-import { PrismaClient } from 'generated/client'
-import { EventLogger } from '@src/config/logging'
-import { MessageService } from '@src/service/message.service'
+import * as dotenv from 'dotenv'
+import { ServerType } from '@src/util/type'
+import { ChatHandler } from '@src/handler/chat.handler'
+dotenv.config()
 
-interface ServerToClientEvents {
-    receiveMessage: (message: string) => void
-}
+// run socket
+const socketPort = +process.env.SOCKET_PORT || 3002
 
-interface ClientToServerEvents {
-    sendMessage: (message: string) => void
-}
+const io: ServerType = new Server()
 
-const io = new Server<ClientToServerEvents, ServerToClientEvents>()
-
-new EventLogger(io).config()
-
-const db = new PrismaClient()
-
-const messageService = new MessageService(db)
-
-io.of('/chat').on('connection', async (socket) => {
-    const userId = socket.handshake.headers.user as string
-    const dialogId = socket.handshake.query.dialogId as string
-
-    socket.join(dialogId)
-
-    socket.on('sendMessage', (message) => {
-        socket.to(dialogId).emit('receiveMessage', message)
-        messageService.saveMessages({
-            text: message,
-            userId,
-            dialogId: dialogId,
-        })
-    })
+io.of('/chat').on('connection', (socket) => {
+    const chatHandler = new ChatHandler()
+    chatHandler.chat(socket)
 })
 
-io.listen(3000)
+io.listen(socketPort)
+
+// run express
+import express = require('express')
+const app = express()
+
+app.get('/', (req, res) => {
+    res.send('Hello World!')
+})
+
+const port = +process.env.PORT || 3001
+
+app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`)
+})
