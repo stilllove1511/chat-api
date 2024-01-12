@@ -2,5 +2,6 @@
     "compilerOptions": {
         "noImplicitAny": false,
         "outDir": "dist"
-    }
+    },
+    "extends": "./tsconfig.paths.json",
 }

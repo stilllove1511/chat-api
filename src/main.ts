@@ -1,5 +1,5 @@
 import { Server } from 'socket.io'
-import { EventLogger } from './config/logging'
+import { EventLogger } from '@src/config/logging'
 
 interface ServerToClientEvents {
     receiveMessage: (message: string) => void
