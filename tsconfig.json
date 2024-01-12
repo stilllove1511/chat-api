@@ -1,7 +1,10 @@
 {
     "compilerOptions": {
         "noImplicitAny": false,
-        "outDir": "dist"
-    },
-    "extends": "./tsconfig.paths.json",
+        "outDir": "dist",
+        "baseUrl": ".",
+        "paths": {
+            "@src/*": ["src/*"]
+        }
+    }
 }

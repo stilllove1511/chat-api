@@ -1,5 +1,5 @@
 ```
 npm i
 npx prisma generate
-npm run dev
+npm start
 ```
