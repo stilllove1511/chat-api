@@ -1,31 +1,28 @@
 import { Server } from 'socket.io'
 import * as dotenv from 'dotenv'
 import { ServerType } from '@src/util/type'
-import { ChatHandler } from '@src/handler/chat.handler'
 dotenv.config()
+import { configSocketPath } from '@src/routes/socket'
 
 // run socket
 const socketPort = +process.env.SOCKET_PORT || 3002
 
 const io: ServerType = new Server()
 
-io.of('/chat').on('connection', (socket) => {
-    const chatHandler = new ChatHandler()
-    chatHandler.chat(socket)
-})
+configSocketPath(io)
 
 io.listen(socketPort)
 
 // run express
 import express = require('express')
+import { configRestPath } from '@src/routes/rest'
 const app = express()
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-})
+app.use(express.json())
+configRestPath(app)
 
 const port = +process.env.PORT || 3001
 
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+    console.log(`Rest service listening on port ${port}`)
 })

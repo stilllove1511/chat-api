@@ -1,6 +1,5 @@
 import { MessageService } from '@src/service/message.service'
 import { SocketType } from '@src/util/type'
-import { PrismaClient } from 'generated/client'
 
 export class ChatHandler {
     private readonly messageService = new MessageService()

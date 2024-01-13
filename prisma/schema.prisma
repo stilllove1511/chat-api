@@ -14,8 +14,7 @@ datasource db {
 model User {
     id       String    @id @default(uuid())
     password String
-    dialog   Dialog    @relation(fields: [dialogId], references: [id])
-    dialogId String
+    dialogs  Dialog[]
     messages Message[]
 }
 
