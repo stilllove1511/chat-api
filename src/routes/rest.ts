@@ -14,5 +14,7 @@ export const configRestPath = (app: Application) => {
     app.post('/account/login', accountController.login)
     app.post('/account/register', accountController.register)
 
-    app.get('/dialog/get_all', dialogController.findAllDialogs)
+    app.get('/dialog/get_all', dialogController.findAllDialogs, ()=>{
+        console.log('error')
+    })
 }
