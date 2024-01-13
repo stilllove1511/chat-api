@@ -41,5 +41,14 @@ export class ChatHandler {
             userId,
             dialogId: dialog.id,
         })
+
+        socket.on('incomeMessageEvent', (message) => {
+            socket.to(dialog.id).emit('receiveMessageEvent', message)
+            messageService.saveMessages({
+                text: message,
+                userId,
+                dialogId: dialog.id,
+            })
+        })
     }
 }
