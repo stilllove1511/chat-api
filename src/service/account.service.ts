@@ -11,9 +11,10 @@ export class AccountService {
         })
     }
 
-    async createUser({ password }: { password: string }) {
+    async createUser({ id, password }: { id: string; password: string }) {
         return this.db.user.create({
             data: {
+                id: id,
                 password: password,
             },
         })

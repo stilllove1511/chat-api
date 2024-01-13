@@ -18,7 +18,8 @@ export class AccountController {
     }
 
     async register(req: Request, res: Response) {
-        const user = await accountService.createUser({ password: '1' })
+        const { id } = req.body
+        const user = await accountService.createUser({ id: id, password: '1' })
 
         return res.json(user)
     }
