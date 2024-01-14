@@ -3,7 +3,6 @@ import { MessageService } from '@src/service/message.service'
 import { Request, Response } from 'express'
 
 const dialogService = new DialogService()
-const messageService = new MessageService()
 export class DialogController {
     async findAllDialogs(req: Request, res: Response) {
         const userId = req.headers.authorization
@@ -16,15 +15,15 @@ export class DialogController {
 
     async getDialogMessages(req: Request, res: Response) {
         const dialogId = req.params.id as string
-        const { page, size } = req.query as { page: string; size: string }
+        const { page, limit } = req.query as { page: string; limit: string }
 
         const dialog = await dialogService.findDialogWithMessages(
             {
                 id: dialogId,
             },
             {
-                messageSkip: (Number(page) - 1) * Number(size),
-                messagesTake: Number(size),
+                messageSkip: (Number(page) - 1) * Number(limit),
+                messagesTake: Number(limit),
             }
         )
 

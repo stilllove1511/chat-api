@@ -12,6 +12,18 @@ export class DialogService {
                     },
                 },
             },
+            include: {
+                users: {
+                    where: {
+                        id: {
+                            not: cond.userId,
+                        },
+                    },
+                    select: {
+                        id: true,
+                    },
+                },
+            },
         })
     }
 
