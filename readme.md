@@ -1,4 +1,5 @@
 ```
+cp .env.example .env
 npm i
 npx prisma generate
 npx prisma migrate dev --name init
