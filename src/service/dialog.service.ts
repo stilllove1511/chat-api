@@ -54,6 +54,9 @@ export class DialogService {
                 messages: {
                     take: option.messagesTake,
                     skip: option.messageSkip,
+                    orderBy: {
+                        createdAt: 'desc',
+                    },
                 },
             },
         })
