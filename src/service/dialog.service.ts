@@ -58,4 +58,18 @@ export class DialogService {
             },
         })
     }
+
+    findByUserIds(userIds: string[]) {
+        return this.db.dialog.findFirst({
+            where: {
+                users: {
+                    every: {
+                        id: {
+                            in: userIds,
+                        },
+                    },
+                },
+            },
+        })
+    }
 }

@@ -34,9 +34,21 @@ export class ChatHandler {
             const message = socket.handshake.query.message as string
             socket.join(userId)
 
-            const dialog = await dialogService.createDialog({
-                userIds: [userId, chatWith],
-            })
+            const dialog = await (async () => {
+                const existedDialog = dialogService.findByUserIds([
+                    userId,
+                    chatWith,
+                ])
+                if (existedDialog) {
+                    return existedDialog
+                }
+
+                const newDialog = await dialogService.createDialog({
+                    userIds: [userId, chatWith],
+                })
+
+                return newDialog
+            })()
 
             socket.join(dialog.id)
 
