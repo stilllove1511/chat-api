@@ -1,6 +1,6 @@
 import { PrismaClient } from 'generated/client'
 
-export class AccountService {
+export class UserService {
     private readonly db: PrismaClient = new PrismaClient()
 
     async finOneUser({ id }: { id: string }) {

@@ -18,9 +18,11 @@ io.listen(socketPort)
 // run express
 import express = require('express')
 import { configRestPath } from '@src/routes/rest'
+import cors = require('cors')
 const app = express()
 
 app.use(express.json())
+app.use(cors())
 configRestPath(app)
 
 // Error handling
@@ -37,5 +39,3 @@ const port = +process.env.PORT || 3001
 app.listen(port, () => {
     console.log(`Rest service listening on port ${port}`)
 })
-
-//TODO: config error handling for socket io
