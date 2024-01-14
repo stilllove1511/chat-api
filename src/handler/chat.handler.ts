@@ -8,7 +8,7 @@ const dialogService = new DialogService()
 export class ChatHandler {
     chat(socket: SocketType) {
         try {
-            const userId = socket.handshake.headers.user as string
+            const userId = socket.handshake.headers.authorization as string
             const dialogId = socket.handshake.query.dialogId as string
 
             socket.join(dialogId)
