@@ -11,10 +11,13 @@ export const configRestPath = (app: Application) => {
         res.send('OK')
     })
 
+    //account
     app.post('/account/login', accountController.login)
     app.post('/account/register', accountController.register)
 
-    app.get('/dialog/get_all', dialogController.findAllDialogs, ()=>{
+    //dialog
+    app.get('/dialog/get_all', dialogController.findAllDialogs, () => {
         console.log('error')
     })
+    app.get('/dialog/:id/messages', dialogController.getDialogMessages)
 }
