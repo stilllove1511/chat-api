@@ -35,4 +35,26 @@ export class DialogController {
 
         return res.json(dialog)
     }
+
+    async createDialog(req: Request, res: Response) {
+        const userId = req.headers.authorization
+        const { partnerId } = req.body as { partnerId: string }
+
+        const dialogFind = await dialogService.findByUserIds([
+            userId,
+            partnerId,
+        ])
+
+        if (dialogFind) {
+            return res.status(400).json({
+                message: 'Dialog already exist',
+            })
+        }
+
+        const dialog = await dialogService.createDialog({
+            userIds: [userId, partnerId],
+        })
+
+        return res.json(dialog)
+    }
 }
