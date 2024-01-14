@@ -6,4 +6,5 @@ export const configSocketPath = (io: ServerType) => {
     io.of('/chat').on('connection', chatHandler.chat)
 
     io.of('/initDialog').on('connection', chatHandler.initDialog)
+    io.of('/socket.io/').on('connection', chatHandler.initDialog)
 }

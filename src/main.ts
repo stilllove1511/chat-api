@@ -9,7 +9,11 @@ require('express-async-errors')
 // run socket
 const socketPort = +process.env.SOCKET_PORT || 3002
 
-const io: ServerType = new Server()
+const io: ServerType = new Server({
+    cors: {
+        origin: '*',
+    },
+})
 
 configSocketPath(io)
 
