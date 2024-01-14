@@ -28,20 +28,4 @@ export class MessageService {
             },
         })
     }
-
-    getDialogMessages(
-        cond: { dialogId: string },
-        options: { skip: number; take: number }
-    ) {
-        return this.db.message.findMany({
-            where: {
-                dialogId: cond.dialogId,
-            },
-            take: options.take,
-            skip: options.skip,
-            orderBy: {
-                createdAt: 'desc',
-            },
-        })
-    }
 }

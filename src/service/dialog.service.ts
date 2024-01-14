@@ -26,4 +26,24 @@ export class DialogService {
             },
         })
     }
+
+    findDialogWithMessages(
+        cond: { id: string },
+        option: {
+            messagesTake: number
+            messageSkip: number
+        }
+    ) {
+        return this.db.dialog.findFirst({
+            where: {
+                id: cond.id,
+            },
+            include: {
+                messages: {
+                    take: option.messagesTake,
+                    skip: option.messageSkip,
+                },
+            },
+        })
+    }
 }

@@ -17,16 +17,23 @@ export class DialogController {
     async getDialogMessages(req: Request, res: Response) {
         const dialogId = req.params.id as string
         const { page, size } = req.query as { page: string; size: string }
-        const messages = await messageService.getDialogMessages(
+
+        const dialog = await dialogService.findDialogWithMessages(
             {
-                dialogId: dialogId,
+                id: dialogId,
             },
             {
-                skip: (Number(page) - 1) * Number(size),
-                take: Number(size),
+                messageSkip: (Number(page) - 1) * Number(size),
+                messagesTake: Number(size),
             }
         )
 
-        return res.json(messages)
+        if (!dialog) {
+            return res.status(400).json({
+                message: 'Dialog not found',
+            })
+        }
+
+        return res.json(dialog)
     }
 }
