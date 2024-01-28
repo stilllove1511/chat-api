@@ -1,11 +1,11 @@
 import { Server, Socket } from 'socket.io'
 
 export interface ServerToClientEvents {
-    receiveMessageEvent: (message: string) => void
+    serverReceiveMessageEvent: (message: string) => void
 }
 
 export interface ClientToServerEvents {
-    incomeMessageEvent: (message: string) => void
+    clientSendMessageEvent: (message: string) => void
 }
 
 export type SocketType = Socket<ClientToServerEvents, ServerToClientEvents>

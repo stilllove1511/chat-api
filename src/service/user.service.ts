@@ -1,7 +1,7 @@
 import { PrismaClient } from 'generated/client'
 
 export class UserService {
-    private readonly db: PrismaClient = new PrismaClient()
+    constructor(private readonly db: PrismaClient) {}
 
     async finOneUser({ id }: { id: string }) {
         return this.db.user.findFirst({

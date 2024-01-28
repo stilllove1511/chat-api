@@ -1,12 +1,12 @@
 import { DialogService } from '@src/service/dialog.service'
-import { MessageService } from '@src/service/message.service'
 import { Request, Response } from 'express'
 
-const dialogService = new DialogService()
 export class DialogController {
+    constructor(private readonly dialogService: DialogService) {}
+
     async findAllDialogs(req: Request, res: Response) {
         const userId = req.headers.authorization
-        const dialogs = await dialogService.findAllDialogs({
+        const dialogs = await this.dialogService.findAllDialogs({
             userId: userId,
         })
 
@@ -17,7 +17,7 @@ export class DialogController {
         const dialogId = req.params.id as string
         const { page, limit } = req.query as { page: string; limit: string }
 
-        const dialog = await dialogService.findDialogWithMessages(
+        const dialog = await this.dialogService.findDialogWithMessages(
             {
                 id: dialogId,
             },
@@ -40,7 +40,7 @@ export class DialogController {
         const userId = req.headers.authorization
         const { partnerId } = req.body as { partnerId: string }
 
-        const dialogFind = await dialogService.findByUserIds([
+        const dialogFind = await this.dialogService.findByUserIds([
             userId,
             partnerId,
         ])
@@ -51,7 +51,7 @@ export class DialogController {
             })
         }
 
-        const dialog = await dialogService.createDialog({
+        const dialog = await this.dialogService.createDialog({
             userIds: [userId, partnerId],
         })
 

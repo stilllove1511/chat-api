@@ -1,7 +1,7 @@
 import { PrismaClient } from 'generated/client'
 
 export class DialogService {
-    private readonly db: PrismaClient = new PrismaClient()
+    constructor(private readonly db: PrismaClient) {}
 
     findAllDialogs(cond: { userId: string }) {
         return this.db.dialog.findMany({

@@ -1,11 +1,9 @@
-import { DialogService } from '@src/service/dialog.service'
 import { MessageService } from '@src/service/message.service'
 import { SocketType } from '@src/util/type'
 
-const messageService = new MessageService()
-const dialogService = new DialogService()
+export class ChatController {
+    constructor(private readonly messageService: MessageService) {}
 
-export class ChatHandler {
     chat(socket: SocketType) {
         try {
             const userId = socket.handshake.headers.authorization as string
@@ -13,10 +11,10 @@ export class ChatHandler {
 
             socket.join(dialogId)
 
-            socket.on('incomeMessageEvent', (message) => {
-                socket.to(dialogId).emit('receiveMessageEvent', message)
+            socket.on('clientSendMessageEvent', (message) => {
+                socket.to(dialogId).emit('serverReceiveMessageEvent', message)
                 try {
-                    messageService.saveMessages({
+                    this.messageService.saveMessages({
                         text: message,
                         userId,
                         dialogId: dialogId,

@@ -7,7 +7,7 @@ import { Request, Response, NextFunction } from 'express'
 require('express-async-errors')
 
 import express = require('express')
-import { configRestPath } from '@src/routes/rest'
+import { configRestPath } from '@src/routes'
 import cors = require('cors')
 const app = express()
 const server = require('http').createServer()

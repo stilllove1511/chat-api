@@ -1,12 +1,13 @@
 import { UserService } from '@src/service/user.service'
 import { Request, Response } from 'express'
 
-const userService = new UserService()
 export class AccountController {
+    constructor(private readonly userService: UserService) {}
+
     async login(req: Request, res: Response) {
         const { id } = req.body
 
-        const user = await userService.finOneUser({ id })
+        const user = await this.userService.finOneUser({ id })
 
         if (!user) {
             return res.status(401).json({
@@ -19,11 +20,11 @@ export class AccountController {
 
     async register(req: Request, res: Response) {
         const { id } = req.body
-        const user = await userService.finOneUser({ id })
+        const user = await this.userService.finOneUser({ id })
         if (user)
             return res.status(400).json({ message: 'User already exists' })
 
-        const userCreated = await userService.createUser({
+        const userCreated = await this.userService.createUser({
             id: id,
             password: '1',
         })
