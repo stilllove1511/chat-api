@@ -19,4 +19,17 @@ export class UserService {
             },
         })
     }
+
+    searchUser({ id }: { id: string }) {
+        return this.db.user.findMany({
+            where: {
+                id: {
+                    contains: id,
+                },
+            },
+            select: {
+                id: true,
+            },
+        })
+    }
 }

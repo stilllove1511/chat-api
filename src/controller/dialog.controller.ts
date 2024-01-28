@@ -1,4 +1,5 @@
 import { DialogService } from '@src/service/dialog.service'
+import { AppBodyRequest } from '@src/util/type'
 import { Request, Response } from 'express'
 
 export class DialogController {
@@ -36,14 +37,15 @@ export class DialogController {
         return res.json(dialog)
     }
 
-    async createDialog(req: Request, res: Response) {
-        const userId = req.headers.authorization
-        const { partnerId } = req.body as { partnerId: string }
+    async createDialog(
+        req: AppBodyRequest<{
+            userIds: string[]
+        }>,
+        res: Response
+    ) {
+        const { userIds } = req.body
 
-        const dialogFind = await this.dialogService.findByUserIds([
-            userId,
-            partnerId,
-        ])
+        const dialogFind = await this.dialogService.findByUserIds(userIds)
 
         if (dialogFind) {
             return res.status(400).json({
@@ -52,7 +54,7 @@ export class DialogController {
         }
 
         const dialog = await this.dialogService.createDialog({
-            userIds: [userId, partnerId],
+            userIds,
         })
 
         return res.json(dialog)

@@ -36,6 +36,14 @@ export class DialogService {
                     })),
                 },
             },
+            select: {
+                id: true,
+                users: {
+                    select: {
+                        id: true,
+                    },
+                },
+            },
         })
     }
 

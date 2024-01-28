@@ -5,7 +5,7 @@ import { PrismaClient } from 'generated/client'
 
 const db = new PrismaClient()
 const messageService = new MessageService(db)
-const chatHandler = new ChatController(messageService)
+const chatController = new ChatController(messageService)
 export const configSocketPath = (io: ServerType) => {
-    io.on('connection', chatHandler.chat)
+    io.on('connection', chatController.chat.bind(chatController))
 }

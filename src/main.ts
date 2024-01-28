@@ -14,7 +14,7 @@ const server = require('http').createServer()
 const io: ServerType = new Server(server, {
     path: '/',
     cors: {
-        origin: 'http://localhost:3000',
+        origin: '*',
     },
 })
 configSocketPath(io)
