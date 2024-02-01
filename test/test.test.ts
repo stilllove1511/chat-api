@@ -1,5 +1,5 @@
-import { describe, expect, test } from '@jest/globals'
-import { PrismaClient, PrismaPromise } from '@root/generated/client'
+import { describe, expect } from '@jest/globals'
+import { PrismaClient } from '@root/generated/client'
 import { UserController } from '@src/controller/user.controller'
 import { UserService } from '@src/service/user.service'
 
@@ -8,13 +8,13 @@ describe('test', () => {
         const db = new PrismaClient()
         const userService = new UserService(db)
         const userController = new UserController(userService)
-        const searchKey = 'test'
+        const key = 'test'
         jest.spyOn(db.user, 'findMany').mockImplementation(
-            (key) =>
+            () =>
                 new Promise((resolve) => {
                     resolve([
                         {
-                            id: searchKey,
+                            id: key,
                         },
                     ])
                 }) as any
@@ -33,7 +33,7 @@ describe('test', () => {
             )
         ).toEqual([
             {
-                id: searchKey,
+                id: key,
             },
         ])
     })
