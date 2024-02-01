@@ -1,5 +1,5 @@
 import { Server, Socket } from 'socket.io'
-import { Request } from 'express'
+import { Request, Response } from 'express'
 import { SOCKET_EVENT } from '@src/util/enum'
 
 export interface ServerToClientEvents {
@@ -14,10 +14,27 @@ export type SocketType = Socket<ClientToServerEvents, ServerToClientEvents>
 
 export type ServerType = Server<ClientToServerEvents, ServerToClientEvents>
 
-export type AppBodyRequest<Body> = Request & {
-    body: Body
-}
+export type AppBodyRequest<Body> =
+    | (Request & {
+          body: Body
+      })
+    | {
+          body: Body
+      }
 
-export type AppQueryRequest<Query> = Request & {
-    query: Request['query'] & Query
-}
+export type AppQueryRequest<Query> =
+    | (Request & {
+          query: Request['query'] & Query
+      })
+    | {
+          query: Request['query'] & Query
+      }
+
+export type AppResponse<Data = Record<string, any>> =
+    | Response
+    | {
+          json?: (data: Data) => void
+          status?: (code: number) => {
+              json: (data: Data) => void
+          }
+      }

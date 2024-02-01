@@ -4,8 +4,9 @@
         "outDir": "dist",
         "baseUrl": ".",
         "paths": {
-            "@src/*": ["src/*"]
+            "@src/*": ["src/*"],
+            "@root/*": ["./*"]
         },
-        "experimentalDecorators": true
+        "experimentalDecorators": true,
     }
 }

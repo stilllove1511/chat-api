@@ -1,6 +1,5 @@
 import { UserService } from '@src/service/user.service'
-import { AppQueryRequest } from '@src/util/type'
-import { Request, Response } from 'express'
+import { AppQueryRequest, AppResponse } from '@src/util/type'
 
 export class UserController {
     constructor(private readonly userService: UserService) {}
@@ -9,7 +8,7 @@ export class UserController {
         req: AppQueryRequest<{
             search: string
         }>,
-        res: Response
+        res: AppResponse
     ) {
         const { search } = req.query
 
