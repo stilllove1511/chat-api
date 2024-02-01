@@ -15,6 +15,7 @@ export type SocketType = Socket<ClientToServerEvents, ServerToClientEvents>
 export type ServerType = Server<ClientToServerEvents, ServerToClientEvents>
 
 export type AppBodyRequest<Body> =
+    | Request
     | (Request & {
           body: Body
       })
@@ -23,6 +24,7 @@ export type AppBodyRequest<Body> =
       }
 
 export type AppQueryRequest<Query> =
+    | Request
     | (Request & {
           query: Request['query'] & Query
       })

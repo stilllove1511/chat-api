@@ -12,7 +12,9 @@ export class UserController {
     ) {
         const { search } = req.query
 
-        const users = await this.userService.searchUser({ id: search })
+        const users = await this.userService.searchUser({
+            id: search as string,
+        })
 
         return res.json(users)
     }
