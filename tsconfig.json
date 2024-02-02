@@ -8,5 +8,8 @@
             "@root/*": ["./*"]
         },
         "experimentalDecorators": true,
+        "target": "es5",
+        "module": "commonjs",
+        "skipLibCheck": true,
     }
 }
