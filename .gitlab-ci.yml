@@ -1,0 +1,40 @@
+stages:
+    # - sonarqube-check
+    - build
+    - deploy
+
+variables:
+    SERVER: $SERVER
+    DIRECTORY_PATH: $DIRECTORY_PATH
+    DOCKER_IMAGE: $DOCKER_IMAGE
+    DOCKER_CONTAINER: $DOCKER_CONTAINER
+    PORT: $PORT
+    CI: 'false'
+
+cache:
+    paths:
+        - node_modules
+
+deploy:
+    stage: deploy-ec2
+    only:
+        - master
+    tags:
+        - deploy-tag
+    script:
+        - ssh -o StrictHostKeyChecking=no ubuntu@$SERVER "cd $DIRECTORY_PATH && pwd && ls -al && git pull -f"
+        - echo "Deployed staging successfully"
+
+build:
+    stage: build-ec2
+    tags:
+        - build-tag
+    only:
+        - main
+        - beta
+        - staging
+        - dev
+    script:
+        - echo "Building the project"
+        - docker build -t $CI_REGISTRY_IMAGE -f Dockerfile .
+        - docker run -d -p $PORT:$PORT --name $DOCKER_CONTAINER $CI_REGISTRY_IMAGE
