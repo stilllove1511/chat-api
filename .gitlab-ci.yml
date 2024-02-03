@@ -1,7 +1,7 @@
 stages:
     # - sonarqube-check
-    - build
-    - deploy
+    - deploy-ec2
+    - build-ec2 
 
 variables:
     SERVER: $SERVER
