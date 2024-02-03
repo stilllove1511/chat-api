@@ -1,7 +1,6 @@
 stages:
-    # - sonarqube-check
-    - deploy-ec2
-    - build-ec2
+    - deploy
+    - build
 
 variables:
     SERVER: $SERVER
@@ -16,19 +15,19 @@ cache:
         - node_modules
 
 deploy:
-    stage: deploy-ec2
+    stage: deploy
     only:
         - master
     tags:
-        - deploy-tag
+        - deploy
     script:
         - ssh -o StrictHostKeyChecking=no ubuntu@$SERVER "cd $DIRECTORY_PATH && pwd && ls -al && git pull -f"
         - echo "Deployed staging successfully"
 
 build:
-    stage: build-ec2
+    stage: build
     tags:
-        - build-tag
+        - build
     only:
         - master
     script:
