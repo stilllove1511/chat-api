@@ -1,17 +1,4 @@
 {
-    "compilerOptions": {
-        "noImplicitAny": false,
-        "target": "ES6",
-        "module": "commonjs",
-        "outDir": "dist",
-        "baseUrl": ".",
-        "paths": {
-            "@src/*": ["src/*"],
-            "@root/*": ["./*"]
-        },
-        "experimentalDecorators": true,
-        "resolveJsonModule": true,
-        "esModuleInterop": true
-    },
+    "extends": "./tsconfig.json",
     "include": ["src/**/*"]
 }

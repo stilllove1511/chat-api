@@ -1,6 +1,8 @@
 {
     "compilerOptions": {
         "noImplicitAny": false,
+        "target": "ES6",
+        "module": "commonjs",
         "outDir": "dist",
         "baseUrl": ".",
         "paths": {
@@ -9,6 +11,6 @@
         },
         "experimentalDecorators": true,
         "resolveJsonModule": true,
-        "esModuleInterop": true
-    }
+        "esModuleInterop": true,
+    },
 }
