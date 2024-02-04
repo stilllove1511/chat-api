@@ -18,7 +18,7 @@ deploy:
         - master
     script:
         - pwd
-        - git pull -f
+        - git pull origin master
         - echo "Deployed staging successfully"
 
 build:
