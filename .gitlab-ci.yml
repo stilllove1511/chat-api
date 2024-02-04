@@ -17,7 +17,8 @@ deploy:
     only:
         - master
     script:
-        - cd ~/chat-api
+        - pwd
+        - cd ./chat-api
         - git pull -f
         - echo "Deployed staging successfully"
 
