@@ -4,3 +4,4 @@ package-lock.json
 generated
 .env
 prisma/migrations
+cert
