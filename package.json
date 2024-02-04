@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "start": "npx ts-node-dev -r tsconfig-paths/register src/main.ts",
-    "build": "npm run test && tsc --project ./tsconfig.build.json",
+    "build": "tsc --project ./tsconfig.build.json",
     "prod": "node dist/main.js"
   },
   "author": "",
