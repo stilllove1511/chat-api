@@ -13,7 +13,7 @@ export class NotificationService {
         })
     }
 
-    async sendNotification({
+    sendNotification({
         title,
         body,
         token,
@@ -30,7 +30,7 @@ export class NotificationService {
             token,
         }
 
-        getMessaging()
+        return getMessaging()
             .send(message)
             .then((response) => {
                 console.log('>>> Successfully sent message:', response)
