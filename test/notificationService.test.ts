@@ -1,4 +1,4 @@
-import { describe, expect } from '@jest/globals'
+import { describe } from '@jest/globals'
 import { NotificationService } from '@src/service/notìication.service'
 
 describe('NotificationService', () => {

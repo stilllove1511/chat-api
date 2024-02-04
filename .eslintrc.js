@@ -4,4 +4,7 @@ module.exports = {
         "plugin:import/errors",
         "plugin:import/typescript"
     ],
+    "rules": {
+        "no-unused-vars": "warn",
+    }
 }
