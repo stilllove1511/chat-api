@@ -32,4 +32,26 @@ export class UserService {
             },
         })
     }
+
+    getFCMToken({ id }: { id: string }) {
+        return this.db.user.findFirst({
+            where: {
+                id: id,
+            },
+            select: {
+                FCMToken: true,
+            },
+        })
+    }
+
+    saveFCMToken({ id, FCMToken }: { id: string; FCMToken: string }) {
+        return this.db.user.update({
+            where: {
+                id: id,
+            },
+            data: {
+                FCMToken: FCMToken,
+            },
+        })
+    }
 }

@@ -15,6 +15,7 @@ model User {
     password String
     dialogs  Dialog[]
     messages Message[]
+    FCMToken String?
 }
 
 model Dialog {

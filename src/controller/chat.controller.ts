@@ -1,9 +1,15 @@
 import { MessageService } from '../service/message.service'
+import { NotificationService } from '../service/notìication.service'
+import { UserService } from '../service/user.service'
 import { SOCKET_EVENT } from '../util/enum'
 import { SocketType } from '../util/type'
 
 export class ChatController {
-    constructor(private readonly messageService: MessageService) {}
+    constructor(
+        private readonly messageService: MessageService,
+        private readonly notificationService: NotificationService,
+        private readonly userService: UserService
+    ) {}
 
     chat(socket: SocketType) {
         try {
@@ -18,6 +24,19 @@ export class ChatController {
                     socket
                         .to(dialogId)
                         .emit(SOCKET_EVENT.SERVER_SEND_MESSAGE_EVENT, message)
+
+                    try {
+                        const FCMToken = await this.userService.getFCMToken({
+                            id: userId,
+                        })
+
+                        this.notificationService.sendNotification({
+                            title: userId,
+                            body: message,
+                            token: FCMToken.FCMToken,
+                        })
+                    } catch (error) {}
+
                     try {
                         await this.messageService.saveMessages({
                             text: message,

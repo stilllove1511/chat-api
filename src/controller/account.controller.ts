@@ -1,10 +1,17 @@
 import { Request, Response } from 'express'
 import { UserService } from '../service/user.service'
+import { AppBodyRequest } from '../util/type'
 
 export class AccountController {
     constructor(private readonly userService: UserService) {}
 
-    async login(req: Request, res: Response) {
+    async login(
+        req: AppBodyRequest<{
+            id: string
+            FCMToken: string
+        }>,
+        res: Response
+    ) {
         const { id } = req.body
 
         const user = await this.userService.finOneUser({ id })
@@ -14,6 +21,11 @@ export class AccountController {
                 message: 'Username or password is incorrect',
             })
         }
+
+        await this.userService.saveFCMToken({
+            id,
+            FCMToken: req.body.FCMToken,
+        })
 
         return res.json(user)
     }
