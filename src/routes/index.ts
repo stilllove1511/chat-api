@@ -1,10 +1,10 @@
+import { Request, Response } from 'express'
+import { Application } from 'express'
 import {
     accountController,
     dialogController,
     userController,
-} from '@src/core/controller'
-import { Request, Response } from 'express'
-import { Application } from 'express'
+} from '../core/controller'
 
 export const configRestPath = (app: Application) => {
     app.get('/health_check', (req: Request, res: Response) => {

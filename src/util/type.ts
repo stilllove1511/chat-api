@@ -1,6 +1,6 @@
 import { Server, Socket } from 'socket.io'
 import { Request, Response } from 'express'
-import { SOCKET_EVENT } from '@src/util/enum'
+import { SOCKET_EVENT } from './enum'
 
 export interface ServerToClientEvents {
     [SOCKET_EVENT.SERVER_SEND_MESSAGE_EVENT]: (message: string) => void

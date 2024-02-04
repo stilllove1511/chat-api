@@ -1,5 +1,5 @@
-import { UserService } from '@src/service/user.service'
-import { AppQueryRequest, AppResponse } from '@src/util/type'
+import { UserService } from '../service/user.service'
+import { AppQueryRequest, AppResponse } from '../util/type'
 
 export class UserController {
     constructor(private readonly userService: UserService) {}

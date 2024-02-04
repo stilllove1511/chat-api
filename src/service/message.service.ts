@@ -1,4 +1,4 @@
-import { PrismaClient } from 'generated/client'
+import { PrismaClient } from '@prisma/client'
 
 export class MessageService {
     constructor(private readonly db: PrismaClient) {}

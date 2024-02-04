@@ -1,6 +1,6 @@
-import { MessageService } from '@src/service/message.service'
-import { SOCKET_EVENT } from '@src/util/enum'
-import { SocketType } from '@src/util/type'
+import { MessageService } from '../service/message.service'
+import { SOCKET_EVENT } from '../util/enum'
+import { SocketType } from '../util/type'
 
 export class ChatController {
     constructor(private readonly messageService: MessageService) {}

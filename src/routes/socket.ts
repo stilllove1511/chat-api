@@ -1,7 +1,7 @@
-import { ChatController } from '@src/controller/chat.controller'
-import { MessageService } from '@src/service/message.service'
-import { ServerType } from '@src/util/type'
-import { PrismaClient } from 'generated/client'
+import { PrismaClient } from '@prisma/client'
+import { ChatController } from '../controller/chat.controller'
+import { MessageService } from '../service/message.service'
+import { ServerType } from '../util/type'
 
 const db = new PrismaClient()
 const messageService = new MessageService(db)

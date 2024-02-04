@@ -1,14 +1,15 @@
 import { Server } from 'socket.io'
 import * as dotenv from 'dotenv'
-import { ServerType } from '@src/util/type'
 dotenv.config()
-import { configSocketPath } from '@src/routes/socket'
 import { Request, Response, NextFunction } from 'express'
 require('express-async-errors')
 
 import express = require('express')
-import { configRestPath } from '@src/routes'
 import cors = require('cors')
+import { configSocketPath } from './routes/socket'
+import { ServerType } from './util/type'
+import { configRestPath } from './routes'
+
 const app = express()
 const server = require('http').createServer()
 const io: ServerType = new Server(server, {

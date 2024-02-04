@@ -1,6 +1,6 @@
-import { DialogService } from '@src/service/dialog.service'
-import { AppBodyRequest } from '@src/util/type'
 import { Request, Response } from 'express'
+import { DialogService } from '../service/dialog.service'
+import { AppBodyRequest } from '../util/type'
 
 export class DialogController {
     constructor(private readonly dialogService: DialogService) {}
