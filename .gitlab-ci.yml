@@ -27,5 +27,5 @@ build:
         - master
     script:
         - echo "Building the project"
-        - docker build -t $CI_REGISTRY_IMAGE -f Dockerfile .
-        - docker run -d -p $PORT:$PORT --name $DOCKER_CONTAINER $CI_REGISTRY_IMAGE
+        - sudo docker build -t $CI_REGISTRY_IMAGE -f Dockerfile .
+        - sudo docker run -d -p $PORT:$PORT --name $DOCKER_CONTAINER $CI_REGISTRY_IMAGE
