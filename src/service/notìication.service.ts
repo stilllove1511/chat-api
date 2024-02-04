@@ -1,4 +1,6 @@
+// eslint-disable-next-line import/no-unresolved
 import { initializeApp } from 'firebase-admin/app'
+// eslint-disable-next-line import/no-unresolved
 import { getMessaging } from 'firebase-admin/messaging'
 import serviceAccount from '../cert/chat-f89cb-firebase-adminsdk-fjetm-c6be34f6a3.json'
 import * as admin from 'firebase-admin'
