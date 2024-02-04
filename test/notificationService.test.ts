@@ -1,8 +1,8 @@
 import { describe, expect } from '@jest/globals'
 import { NotificationService } from '@src/service/notìication.service'
 
-describe('userController', () => {
-    it('search user', async () => {
+describe('NotificationService', () => {
+    it('push notification', async () => {
         const notificationService = new NotificationService()
         notificationService.sendNotification({
             title: 'NodeJS',
