@@ -21,5 +21,6 @@ export const userController = new UserController(userService)
 export const chatController = new ChatController(
     messageService,
     notificationService,
-    userService
+    userService,
+    dialogService
 )

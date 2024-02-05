@@ -83,4 +83,19 @@ export class DialogService {
             },
         })
     }
+
+    findById(id: string) {
+        return this.db.dialog.findFirst({
+            where: {
+                id,
+            },
+            include: {
+                users: {
+                    select: {
+                        id: true,
+                    },
+                },
+            },
+        })
+    }
 }

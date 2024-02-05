@@ -1,3 +1,4 @@
+import { DialogService } from '../service/dialog.service'
 import { MessageService } from '../service/message.service'
 import { NotificationService } from '../service/notification.service'
 import { UserService } from '../service/user.service'
@@ -8,7 +9,8 @@ export class ChatController {
     constructor(
         private readonly messageService: MessageService,
         private readonly notificationService: NotificationService,
-        private readonly userService: UserService
+        private readonly userService: UserService,
+        private readonly dialogService: DialogService
     ) {}
 
     chat(socket: SocketType) {
@@ -24,28 +26,38 @@ export class ChatController {
                     socket
                         .to(dialogId)
                         .emit(SOCKET_EVENT.SERVER_SEND_MESSAGE_EVENT, message)
+                    ;(async () => {
+                        try {
+                            const partnerId = (
+                                await this.dialogService.findById(dialogId)
+                            ).users.find((user) => user.id !== userId).id
 
-                    try {
-                        const FCMToken = await this.userService.getFCMToken({
-                            id: userId,
-                        })
+                            const FCMToken = (await this.userService.getFCMToken(
+                                {
+                                    id: partnerId,
+                                }
+                            )).FCMToken
 
-                        this.notificationService.sendNotification({
-                            title: userId,
-                            body: message,
-                            token: FCMToken.FCMToken,
-                        })
-                    } catch (error) {}
-
-                    try {
-                        await this.messageService.saveMessages({
-                            text: message,
-                            userId,
-                            dialogId: dialogId,
-                        })
-                    } catch (error) {
-                        console.log(error)
-                    }
+                            this.notificationService.sendNotification({
+                                title: userId,
+                                body: message,
+                                token: FCMToken,
+                            })
+                        } catch (error) {
+                            console.log(error)
+                        }
+                    })()
+                    ;(async () => {
+                        try {
+                            await this.messageService.saveMessages({
+                                text: message,
+                                userId,
+                                dialogId: dialogId,
+                            })
+                        } catch (error) {
+                            console.log(error)
+                        }
+                    })()
                 }
             )
         } catch (error) {
