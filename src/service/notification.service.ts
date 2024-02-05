@@ -34,11 +34,5 @@ export class NotificationService {
 
         return getMessaging()
             .send(message)
-            .then((response) => {
-                console.log('>>> Successfully sent message:', response)
-            })
-            .catch((error) => {
-                console.log('>>> Error sending message:', error)
-            })
     }
 }

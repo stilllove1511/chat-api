@@ -1,5 +1,5 @@
 import { describe } from '@jest/globals'
-import { NotificationService } from '@src/service/notìication.service'
+import { NotificationService } from '@src/service/notification.service'
 
 describe('NotificationService', () => {
     it('push notification', async () => {

@@ -1,5 +1,5 @@
 import { MessageService } from '../service/message.service'
-import { NotificationService } from '../service/notìication.service'
+import { NotificationService } from '../service/notification.service'
 import { UserService } from '../service/user.service'
 import { SOCKET_EVENT } from '../util/enum'
 import { SocketType } from '../util/type'
